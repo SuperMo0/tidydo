@@ -1,0 +1,123 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 0;
+    --dark_blue: rgb(2, 39, 70);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#tidy {
+
+    width: 80px;
+    height: 80px;
+}
+
+#logo {
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    align-items: center;
+}
+
+header {
+    display: flex;
+    background-color: rgb(2, 39, 70);
+    color: aliceblue;
+    height: 100px;
+    align-items: center;
+}
+
+
+#container {
+
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
+}
+
+#sidebar {
+    background-color: rgb(200, 238, 240);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.281);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+#main {
+    background-color: rgb(202, 198, 198);
+}
+
+#sidebar_item {
+    display: flex;
+    align-items: center;
+    gap: 10%;
+    cursor: pointer;
+    width: 80%;
+    border-radius: 10px;
+    background-color: var(--dark_blue);
+}
+
+#sidebar p {
+    font-size: 180%;
+    color: aliceblue;
+}
+
+#sidebar svg {
+    width: 80px;
+    fill: white;
+}
+
+#project_card {
+    color: aliceblue;
+    background-color: var(--dark_blue);
+    gap: 20px;
+    font-size: 2rem;
+    position: relative;
+}
+
+
+#add_project {
+    cursor: pointer;
+    display: flex;
+    width: 100px;
+    height: 100px;
+    background-color: var(--dark_blue);
+    color: aliceblue;
+    font-size: 5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 48%;
+}
+
+#make_project_prompt {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 10px;
+    background-color: var(--dark_blue);
+    padding: 10px;
+    width: 90%;
+    display: none;
+}
+
+#prompt_row {
+    display: flex;
+    gap: 10px;
+}
+
+#prompt_row button {
+    width: 100px;
+}
