@@ -23,54 +23,72 @@ export default class {
     }
 
     append_project_card(project, container) {
-        let project_card = document.createElement("div")
+        let project_card = document.createElement("div");
         project_card.id = "project_card";
         project_card.style.display = "flex";
         project_card.style.flexDirection = "column";
-        let project_title = document.createElement("h2");
+        let top = document.createElement("div");
+
+        let project_title = document.createElement("h5");
         project_title.id = "project_title";
         project_title.textContent = project.name;
-        let project_icon = document.createElement("img");
-        project_icon.id = project.icon;
-        project_icon.src = project.icon;
-        project_icon.style.width = "90px";
-        project_icon.style.height = "90px";
+
+        let close = document.createElement("div")
+        close.textContent = "✘";
+        close.style["font-size"] = "30px";
+        close.style.width = "30px";
+        close.style.height = "30px";
+        close.style.color = "red";
+        close.style.cursor = "pointer";
+        close.style["background-color"] = "white";
+        close.style.textAlign = "center";
+        close.style.borderRadius = "50px";
+
+        top.appendChild(project_title);
+        top.appendChild(close);
+        top.style.display = "flex";
+        top.style.padding = "10px";
+        top.style.justifyContent = "space-between";
+
+
+        let project_icon = document.createElement("h1");
+        project_icon.id = "project_icon";
+
+        project_icon.textContent = project.icon;
+        project_icon.style.fontSize = "50px";
+
         let project_panner = document.createElement("div");
         project_card.style.borderTopLeftRadius = "30px"
         project_panner.id = "project_panner";
         project_panner.style.height = "20px"
-        project_title.style["align-self"] = "center";
         project_icon.style["align-self"] = "center";
         project_panner.style["background-color"] = project.color;
-        project_card.appendChild(project_title);
+        project_panner.style.marginTop = "auto";
+        project_card.appendChild(top);
         project_card.appendChild(project_icon);
         project_card.appendChild(project_panner);
         project_card.dataset.indexNumber = project.id;
-        let close = document.createElement("div")
-        close.textContent = "x";
-        close.style["font-size"] = "30px";
-        close.style.width = "30px";
-        close.style.height = "30px";
-        close.style.position = "absolute";
-        close.style.color = "red";
-        close.style.left = "220px";
-        close.style.cursor = "pointer";
-        close.addEventListener("click", (e) => { this.remove_project(project.id) });
-        project_card.appendChild(close)
 
-        project_card.addEventListener("click", () => { this.open_project(project) });
+
+
+
+        close.addEventListener("click", (e) => { this.remove_project(project.id) });
+
+        project_card.addEventListener("click", (e) => {
+            if (e.target.textContent == "✘") return;
+            this.open_project(project)
+        });
 
         container.appendChild(project_card);
 
     }
     show_projects() {
-
         this.#main.replaceChildren();
         let container = document.createElement("div");
         container.id = "main_container";
         container.style.display = "grid";
         container.style.gridTemplateColumns = "repeat(auto-fill,minmax(30ch, 1fr))";
-        container.style.gridAutoRows = "200px";
+        container.style.gridAutoRows = "min-content";
         container.style.gap = "40px";
         container.style.padding = "40px";
         this.projects_array.forEach(element => {
@@ -78,8 +96,6 @@ export default class {
         });
         container.style.width = "100%";
         container.style.height = "100%";
-        // container.style["background-color"] = "";
-
         this.#main.appendChild(container);
     }
 
@@ -103,6 +119,7 @@ export default class {
         add = add.cloneNode();
         add.textContent = "+";
         add.style.height = "50px";
+
         add.addEventListener("click", () => {
             let prompt = this.take_note(project); container.replaceChildren(); container.appendChild(heading);
             container.appendChild(add);
@@ -118,7 +135,7 @@ export default class {
         notes_contianer.id = "notes_continaer";
         notes_contianer.style.height = "100%";
         notes_contianer.style.width = "100%";
-        // notes_contianer.style["background-color"] = "lightgreen";
+
         container.appendChild(heading);
         container.appendChild(add);
         container.appendChild(notes_contianer);
@@ -185,17 +202,21 @@ export default class {
         row4.appendChild(pri_label);
         row4.appendChild(pri_input);
 
+        row1.style.justifyContent = "space-around";
+        row2.style.justifyContent = "space-around";
+        row3.style.justifyContent = "space-around";
+        row4.style.justifyContent = "space-around";
         box.appendChild(row1);
         box.appendChild(row2);
         box.appendChild(row3);
         box.appendChild(row4);
-        box.style.width = "400px";
-        box.style.height = "400px";
-        box.style["background-color"] = "red";
+        box.style.width = "600px";
+        box.style.height = "300px";
+        box.style["background-color"] = "rgb(200, 238, 240)";
+        box.style.padding = "20px"
         box.style.display = "flex";
         box.style.flexDirection = "column";
         box.style.justifyContent = "space-between";
-
         let ok = document.createElement("button");
         ok.textContent = "ADD";
         ok.style.width = "50px";
@@ -272,22 +293,37 @@ export default class {
         slider.max = "100";
         slider.value = "0";
 
+        let finished = document.createElement("div");
+
+        let status = document.createElement("div");
+
+        finished.id = "finished";
+        finished.appendChild(slider);
+        status.classList.add("unfinisheds");
+        status.classList.add("finisheds");
+
+        finished.appendChild(status);
 
         slider.addEventListener("input", (e) => {
             a.progress = e.target.value;
-            console.log(e.target.value);
+            if (a.progress == 100) { status.classList.toggle("unfinisheds", false) }
+            else { status.classList.toggle("unfinisheds", true); }
         })
-
         note_shape.appendChild(title_priority_container);
         note_shape.appendChild(des);
         note_shape.appendChild(date);
-        note_shape.append(slider);
+        note_shape.append(finished);
+
         slider.style.alignSelf = "center";
         title_priority_container.style.justifyContent = "space-between";
         note_shape.style.padding = "5px";
+        if (a.progress == 100) { status.classList.toggle("unfinisheds", false) }
+        else { status.classList.toggle("unfinisheds", true); }
+
         return note_shape;
 
     }
+
 
     read_project_input() {
 
@@ -296,7 +332,7 @@ export default class {
         let color_input = document.getElementById("color_input");
 
         title_input = title_input.value;
-        // icon_input = icon_input.value;
+        icon_input = icon_input.value;
         color_input = color_input.value;
         return { title_input, icon_input, color_input };
     }
