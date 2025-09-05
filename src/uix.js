@@ -5,7 +5,6 @@ import notec from "./todo.js";
 
 export default class {
 
-
     #main = document.getElementById("main");
 
     constructor(parray) {
@@ -19,6 +18,7 @@ export default class {
                 return;
             }
         })
+        localStorage.setItem("a", JSON.stringify(this.projects_array));
         this.show_projects();
     }
 
@@ -223,13 +223,13 @@ export default class {
         ok.style.height = "50px";
 
         ok.addEventListener("click", () => {
-
             let title = title_input.value;
             let description = des_input.value;
             let duedate = date_input.value;
             let priority = pri_input.value;
             let note = new notec(title, description, duedate, priority, 0);
             project.todo_array.push(note);
+            localStorage.setItem("a", JSON.stringify(this.projects_array));
             this.open_project(project);
 
         })
@@ -242,6 +242,7 @@ export default class {
 
 
     append_note(title, description, dueDate, priority, progress, project, a) {
+
 
         let note_shape = document.createElement("div");
         note_shape.style.width = "240px";
@@ -291,7 +292,7 @@ export default class {
         slider.type = "range";
         slider.min = "1";
         slider.max = "100";
-        slider.value = "0";
+        slider.value = a.progress;
 
         let finished = document.createElement("div");
 
@@ -306,6 +307,7 @@ export default class {
 
         slider.addEventListener("input", (e) => {
             a.progress = e.target.value;
+            localStorage.setItem("a", JSON.stringify(this.projects_array));
             if (a.progress == 100) { status.classList.toggle("unfinisheds", false) }
             else { status.classList.toggle("unfinisheds", true); }
         })

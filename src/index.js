@@ -4,15 +4,25 @@ import uixc from "./uix.js";
 
 
 let projects_array = [];
+
+let data = localStorage.getItem("a");
+
+if (data == null) {
+    let p = new project("Cooking", "🎯", "red");
+    projects_array.push(p);
+    localStorage.setItem("a", JSON.stringify(projects_array));
+}
+else {
+    projects_array = JSON.parse(data);
+}
+
 let uix = new uixc(projects_array);
-let p = new project("Cooking", "🎯", "red");
-projects_array.push(p);
+uix.show_projects();
 
 let home = document.querySelector(".side1");
-
 home.onclick = () => { uix.show_projects() };
 
-uix.show_projects();
+
 
 let make_project = document.getElementById("make_project_prompt");
 let add_button = document.getElementById("add_project");
@@ -25,6 +35,7 @@ confirm.addEventListener("click", () => {
     let inputs = uix.read_project_input();
     let new_project = new project(inputs.title_input, inputs.icon_input, inputs.color_input);
     projects_array.push(new_project);
+    localStorage.setItem("a", JSON.stringify(projects_array));
     uix.show_projects();
 })
 
