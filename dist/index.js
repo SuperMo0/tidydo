@@ -116,7 +116,7 @@ eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _st
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ project)\n/* harmony export */ });\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n\n\nclass project {\n\n    id;\n    name;\n    color;\n    icon;\n\n    todo_array;\n\n\n\n    constructor(name, icon, color) {\n        this.name = name;\n        this.color = color;\n        this.icon = icon;\n        this.todo_array = [];\n        this.id = crypto.randomUUID();\n    }\n\n\n}\n\n\n\n\n//# sourceURL=webpack://tidydo/./src/project.js?\n}");
+eval("{__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ project)\n/* harmony export */ });\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n\n\nclass project {\n\n    id;\n    name;\n    color;\n    icon;\n\n    todo_array;\n\n    constructor(name, icon, color) {\n        this.name = name;\n        this.color = color;\n        this.icon = icon;\n        this.todo_array = [];\n        this.id = crypto.randomUUID();\n    }\n\n\n}\n\n\n\n\n//# sourceURL=webpack://tidydo/./src/project.js?\n}");
 
 /***/ }),
 

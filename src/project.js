@@ -9,8 +9,6 @@ export default class project {
 
     todo_array;
 
-
-
     constructor(name, icon, color) {
         this.name = name;
         this.color = color;
